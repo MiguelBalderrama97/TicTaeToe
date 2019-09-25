@@ -10,7 +10,7 @@ public class Node {
     
     public Node(){ //NODO INICIAL
         this.tictaetoe = new byte[9];
-        for(int i: tictaetoe){
+        for(int i = 0; i < this.tictaetoe.length; i++){
             tictaetoe[i] = 0;
         }
         this.turn = 1;
@@ -21,7 +21,7 @@ public class Node {
         this.tictaetoe = new byte[9];
         System.arraycopy(node.tictaetoe, 0, this.tictaetoe, 0, this.tictaetoe.length);
         this.turn = node.turn;
-        //this.turn = (byte)(node.turn == 1 ? 0 : 1);
+        this.children = new ArrayList<>();
     }
     
     public void generateChildren(){ // GENERAR TODOS LOS NODOS HIJOS Y ANAÑDIRLOS A LA LISTA CHILDREN
@@ -35,6 +35,12 @@ public class Node {
             }
         }
     }
+    
+    public void printChildrens(){
+        for(int i = 0; i < this.children.size(); i++){
+            System.out.println(this.children.get(i));
+        }
+    } 
 
     @Override
     public String toString() {
@@ -47,13 +53,5 @@ public class Node {
         s += "} Turn: ";
         s += this.turn ==  1 ? "X" : "O";
         return s;
-    }
-    
-    public void printChildrens(){
-        for(int i = 0; i < this.children.size(); i++){
-            System.out.println(this.children.get(i));
-        }
-    }
-    
-    
+    } 
 }
