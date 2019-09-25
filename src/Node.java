@@ -26,9 +26,11 @@ public class Node {
     
     public void generateChildren(){ // GENERAR TODOS LOS NODOS HIJOS Y ANAÑDIRLOS A LA LISTA CHILDREN
         byte market = (byte)(this.turn == 1 ? 1 : 0); //DEFINIR CUAL CARACTER SE ESCRIBIRA DEPENDIENDO DEL TURNO
+        Node node;
+        this.children.clear();  // LIMPIAR LA LISTA EN CASO DE VOLVERLA A LLAMAR
         for(int i = 0; i < this.tictaetoe.length; i++){
             if(this.tictaetoe[i] == 0){ //COMPROBAR SI LA CASILLA ESTA VACIA
-                Node node = new Node(this); //CREAR UN NODO HIJO DE NUESTRO NODO ACTUAL
+                node = new Node(this); //CREAR UN NODO HIJO DE NUESTRO NODO ACTUAL
                 node.tictaetoe[i] = market; //SOBRESCRIBIR CON NUESTRO MARKET
                 node.turn = (byte)(this.turn == 1 ? 2 : 1); //CAMBIO DE TURNO
                 this.children.add(node); //AGREGAR EL NODO A LA LISTA CHILDREN
@@ -36,7 +38,18 @@ public class Node {
         }
     }
     
-    public void printChildrens(){
+    public int getChildrenSize(){ // SABER NUMERO DE HIJOS
+        return this.children.size();
+    }
+    
+    public Node getChild(int index){ // OBETENR UN NODO HIJO POR EL INDEX, SI EL INDICE NO ES VALIDO SE REGRESA UN OBJETO NULL
+        if(index < 0 || index >= this.children.size()){
+            return null;
+        }
+        return this.children.get(index);
+    }
+    
+    public void printChildren(){
         for(int i = 0; i < this.children.size(); i++){
             System.out.println(this.children.get(i));
         }

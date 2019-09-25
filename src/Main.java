@@ -5,6 +5,8 @@ public class Main {
         Node n = new Node();
         System.out.println(n);
         n.generateChildren();
-        n.printChildrens();
+        for(int i = 0; i < n.getChildrenSize(); i++){
+            System.out.println(n.getChild(i));
+        }
     }
 }
