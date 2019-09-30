@@ -53,7 +53,26 @@ public class Node {
         for(int i = 0; i < this.children.size(); i++){
             System.out.println(this.children.get(i));
         }
-    } 
+    }
+    
+    
+    public boolean isFinal(){ //REVISA SI EL ESTADO ACTUAL ES FINAL
+        for (int i = 0; i < 3; i++) {
+            //REVISAR COLUMNAS
+            if(this.tictaetoe[i] != 0 && this.tictaetoe[i] == this.tictaetoe[i+3] && this.tictaetoe[i] == this.tictaetoe[i+6]){
+                return true;
+            }
+            //REVISAR COLUMNAS
+            if(this.tictaetoe[i*3] != 0 && this.tictaetoe[i*3] == this.tictaetoe[i+3+1] && this.tictaetoe[i*3] == this.tictaetoe[i*3+2]){
+                return true;
+            }
+        }
+        
+        if(this.tictaetoe[0] != 0 && this.tictaetoe[0] == this.tictaetoe[4] && this.tictaetoe[0] == this.tictaetoe[8]){
+            return true;
+        }
+        return this.tictaetoe[2] != 0 && this.tictaetoe[2] == this.tictaetoe[4] && this.tictaetoe[2] == this.tictaetoe[6];
+    }
 
     @Override
     public String toString() {
