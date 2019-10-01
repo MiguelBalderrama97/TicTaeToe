@@ -1,8 +1,11 @@
 
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
 public class Main {
 
+    private static LinkedHashSet<Node> lst = new LinkedHashSet<>();
+    
     public static void main(String[] args) {
         Node n = new Node();
         Node res = breadthFS(n);
@@ -28,10 +31,10 @@ public class Main {
     public static Node breadthFS(Node n) {
         Node temp;
         LinkedList<Node> q = new LinkedList<>();
-        q.push(n);
+        q.add(n);
 
         while (!q.isEmpty()) {
-            temp = q.pop();
+            temp = q.remove();
             if (temp.isFinal()) {
                 return temp;
             }
@@ -42,5 +45,18 @@ public class Main {
             }
         }
         return null;
+    }
+    
+    public static void depthFSMulti(Node n) {
+        Node temp;
+        if (n.isFinal()) {
+            lst.add(n);
+            return;
+        }
+
+        n.generateChildren();
+        for (int i = 0; i < n.getChildrenSize(); i++) {
+            depthFSMulti(n.getChild(i));
+        }
     }
 }
