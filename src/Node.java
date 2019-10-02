@@ -25,13 +25,12 @@ public class Node {
     }
 
     public void generateChildren() { // GENERAR TODOS LOS NODOS HIJOS Y ANAÑDIRLOS A LA LISTA CHILDREN
-        byte market = (byte) (this.turn == 1 ? 1 : 0); //DEFINIR CUAL CARACTER SE ESCRIBIRA DEPENDIENDO DEL TURNO
         Node node;
         this.children.clear();  // LIMPIAR LA LISTA EN CASO DE VOLVERLA A LLAMAR
         for (int i = 0; i < this.tictaetoe.length; i++) {
             if (this.tictaetoe[i] == 0) { //COMPROBAR SI LA CASILLA ESTA VACIA
                 node = new Node(this); //CREAR UN NODO HIJO DE NUESTRO NODO ACTUAL
-                node.tictaetoe[i] = market; //SOBRESCRIBIR CON NUESTRO MARKET
+                node.tictaetoe[i] = this.turn;
                 node.turn = (byte) (this.turn == 1 ? 2 : 1); //CAMBIO DE TURNO
                 this.children.add(node); //AGREGAR EL NODO A LA LISTA CHILDREN
             }
@@ -62,7 +61,7 @@ public class Node {
                 return true;
             }
             //REVISAR COLUMNAS
-            if (this.tictaetoe[i * 3] != 0 && this.tictaetoe[i * 3] == this.tictaetoe[i + 3 + 1] && this.tictaetoe[i * 3] == this.tictaetoe[i * 3 + 2]) {
+            if (this.tictaetoe[i * 3] != 0 && this.tictaetoe[i * 3] == this.tictaetoe[i * 3 + 1] && this.tictaetoe[i * 3] == this.tictaetoe[i * 3 + 2]) {
                 return true;
             }
         }
